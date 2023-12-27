@@ -6,12 +6,13 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "3.11.5"
 requests = "^2.31.0"
 pytz = "^2023.3.post1"
 geopy = "^2.4.1"
 pillow = "^10.1.0"
 pep517 = "^0.13.1"
+timezonefinder = "^6.2.0"
 
 
 [build-system]

@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from geopy.geocoders import Nominatim
 from tkinter import ttk,messagebox
-# from timezonefinder import TimezoneFinder
+from timezonefinder import TimezoneFinder
 from datetime import *
 import requests
 import pytz
@@ -13,6 +13,14 @@ m.title("Weather App")
 m.geometry('890x470+300+200')
 m.configure(bg='#3f92ff')
 m.resizable(False,False)
+
+def getweather():
+    city = text_field.get()
+    geolocator = Nominatim(user_agent='geoapiExercises')
+    location = geolocator.geocode(city)
+    obj = TimezoneFinder()
+    result = obj.timezone_at(lng=location.longitude,lat=location.latitude)
+    timezone.config(text=result)
 
 
 image_icon = PhotoImage(file="Images/logo.png")
@@ -49,8 +57,8 @@ text_field.place(x=370,y=130)
 text_field.focus()
 
 search_icon = PhotoImage(file='Images/Layer 6.png')
-icon_image = Button(image=search_icon,borderwidth=0,bg='#203243')
-icon_image.place(x=645,y=125)
+search_image = Button(image=search_icon,borderwidth=0,bg='#203243',command=getweather)
+search_image.place(x=645,y=125)
 
 frame = Frame(m, width=900, height=180, bg='#212120')
 frame.pack(side=BOTTOM)
@@ -65,4 +73,13 @@ Label(frame, image=second_box, bg='#212120').place(x=500,y=30)
 Label(frame, image=second_box, bg='#212120').place(x=600,y=30)
 Label(frame, image=second_box, bg='#212120').place(x=700,y=30)
 Label(frame, image=second_box, bg='#212120').place(x=800,y=30)
+
+clock = Label(m, font=('Helvetica',30,'bold'),fg='white',bg='#57adff')
+clock.place(x=30,y=20)
+
+timezone = Label(m, font=('Helvetica',20),fg='white',bg='#57adff')
+timezone.place(x=700,y=20)
+
+long_lat = Label(m, font=('Helvetica',20),fg='white',bg='#57adff')
+long_lat.place(x=700,y=50)
 m.mainloop()
