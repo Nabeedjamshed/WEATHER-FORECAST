@@ -31,6 +31,12 @@ def getweather():
     current_time = local_time.strftime('%I:%M %p')
     clock.config(text=current_time)
 
+    api="https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&units=metric&exclude=hourly&appid=ad6e4ad799bcb26d267de424771618f3"
+    json_data=requests.get(api).json()
+    print(json_data)
+    
+    # temp=json_data['current']['temp']
+    # print(temp)
 
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
@@ -91,5 +97,4 @@ timezone.place(x=680, y=20)
 
 long_lat = Label(m, font=('Helvetica', 10), fg='white', bg='#57adff')
 long_lat.place(x=680, y=60)
-
 m.mainloop()
