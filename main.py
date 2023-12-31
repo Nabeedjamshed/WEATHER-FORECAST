@@ -19,7 +19,7 @@ m.resizable(False, False)
 
 def getweather():
     city = textfield.get()
-    geolocator = Nominatim(user_agent="your_app_name")
+    geolocator = Nominatim(user_agent="Weather_App")
     location = geolocator.geocode(city)
     obj = TimezoneFinder()
     result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
@@ -33,7 +33,11 @@ def getweather():
 
     api="https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&units=metric&exclude=hourly&appid=ad6e4ad799bcb26d267de424771618f3"
     json_data=requests.get(api).json()
-    
+
+    # api = "https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=59ab8ba866569cd2e9b54db3f44b84ec"
+    # json_data = requests.get(api).json()
+ 
+
     temp = json_data['current']['temp']
     humidity = json_data['current']['humidity']
     pressure = json_data['current']['pressure']
@@ -125,5 +129,26 @@ w.place(x=150, y=180)
 
 d = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 d.place(x=150, y=200)
+
+firstframe = Frame(m, width=230, height=132, bg='#282829')
+firstframe.place(x=35, y=315)
+
+secondframe = Frame(m, width=70, height=115, bg='#282829')
+secondframe.place(x=305, y=325)
+
+thirdframe = Frame(m, width=70, height=115, bg='#282829')
+thirdframe.place(x=405, y=325)
+
+fourthframe = Frame(m, width=70, height=115, bg='#282829')
+fourthframe.place(x=505, y=325)
+
+fifthframe = Frame(m, width=70, height=115, bg='#282829')
+fifthframe.place(x=605, y=325)
+
+sixthframe = Frame(m, width=70, height=115, bg='#282829')
+sixthframe.place(x=705, y=325)
+
+seventhframe = Frame(m, width=70, height=115, bg='#282829')
+seventhframe.place(x=805, y=325)
 m.mainloop()
 
