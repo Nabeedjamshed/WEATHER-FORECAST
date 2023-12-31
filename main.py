@@ -49,6 +49,8 @@ def getweather():
     # temp=json_data['current']['temp']
     # print(temp)
 
+
+
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
 
@@ -92,13 +94,13 @@ frame.pack(side=BOTTOM)
 first_box = PhotoImage(file='Images/Rounded Rectangle 2.png')
 second_box = PhotoImage(file='Images/Rounded Rectangle 2 copy.png')
 
-Label(frame, image=first_box, bg='#212120').place(x=30, y=20)
-Label(frame, image=second_box, bg='#212120').place(x=300, y=30)
-Label(frame, image=second_box, bg='#212120').place(x=400, y=30)
-Label(frame, image=second_box, bg='#212120').place(x=500, y=30)
-Label(frame, image=second_box, bg='#212120').place(x=600, y=30)
-Label(frame, image=second_box, bg='#212120').place(x=700, y=30)
-Label(frame, image=second_box, bg='#212120').place(x=800, y=30)
+Label(frame, image=first_box, bg='#212120').place(x=30,y=20)
+Label(frame, image=second_box, bg='#212120').place(x=300,y=30)
+Label(frame, image=second_box, bg='#212120').place(x=400,y=30)
+Label(frame, image=second_box, bg='#212120').place(x=500,y=30)
+Label(frame, image=second_box, bg='#212120').place(x=600,y=30)
+Label(frame, image=second_box, bg='#212120').place(x=700,y=30)
+Label(frame, image=second_box, bg='#212120').place(x=800,y=30)
 
 clock = Label(m, font=('Helvetica', 30, 'bold'), fg='white', bg='#57adff')
 clock.place(x=30, y=20)
@@ -124,3 +126,4 @@ w.place(x=150, y=180)
 d = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 d.place(x=150, y=200)
 m.mainloop()
+
