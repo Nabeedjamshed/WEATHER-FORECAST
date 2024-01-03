@@ -1,7 +1,6 @@
 from tkinter import *
 import tkinter as tk
 from turtle import width
-
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -31,29 +30,26 @@ def getweather():
     current_time = local_time.strftime('%I:%M %p')
     clock.config(text=current_time)
 
-    api="https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&units=metric&exclude=hourly&appid=ad6e4ad799bcb26d267de424771618f3"
-    json_data=requests.get(api).json()
+    
 
-    # api = "https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=59ab8ba866569cd2e9b54db3f44b84ec"
-    # json_data = requests.get(api).json()
- 
+    api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=59ab8ba866569cd2e9b54db3f44b84ec"
+    json_data = requests.get(api).json()
+    temp = json_data['main']['temp']
+    in_celcius=str(temp-273)
+    humidity = json_data['main']['humidity']
+    pressure = json_data['main']['pressure']
+    wind = json_data['wind']['speed']
+    description = json_data['weather'][0]['description']
 
-    temp = json_data['current']['temp']
-    humidity = json_data['current']['humidity']
-    pressure = json_data['current']['pressure']
-    wind = json_data['current']['wind_speed']
-    description = json_data['current']['weather'][0]['description']
-
-    t.config(text=(temp,'°C'))
+    t.config(text=(in_celcius[:2],'°C'))
     h.config(text=(humidity,'%'))
     p.config(text=(pressure,'hPa'))
     w.config(text=(wind,'m/s'))
     d.config(text=description)
     
-    # temp=json_data['current']['temp']
-    # print(temp)
+   
 
-
+var=StringVar()
 
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
@@ -84,7 +80,7 @@ cloud_image = PhotoImage(file='Images/Layer 7.png')
 weather_image = Label(m, image=cloud_image, bg='#203243')
 weather_image.place(x=290, y=127)
 
-textfield = tk.Entry(m, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', fg='white', border=0)
+textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', fg='white', border=0)
 textfield.place(x=370, y=130)
 textfield.focus()
 
@@ -116,7 +112,7 @@ long_lat = Label(m, font=('Helvetica', 10), fg='white', bg='#57adff')
 long_lat.place(x=680, y=60)
 
 t = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
-t.place(x=150, y=120)
+t.place(x=145, y=120)
 
 h = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 h.place(x=150, y=140)
@@ -128,7 +124,7 @@ w = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 w.place(x=150, y=180)
 
 d = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
-d.place(x=150, y=200)
+d.place(x=145, y=200)
 
 firstframe = Frame(m, width=230, height=132, bg='#282829')
 firstframe.place(x=35, y=315)
