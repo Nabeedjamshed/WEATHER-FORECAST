@@ -46,8 +46,49 @@ def getweather():
     p.config(text=(pressure,'hPa'))
     w.config(text=(wind,'m/s'))
     d.config(text=description)
-    
-   
+
+    # firstdayimage = json_data['weather'][0]['icon']
+    # photo1 = ImageTk.PhotoImage(file=f'icon/{firstdayimage}@2x.png')
+    # firstdayimage.config(image=photo1)
+    # firstdayimage.image=photo1
+
+    # seconddayimage = json_data['daily'][1]['weather'][0]['icon']
+
+
+    # thirddayimage = json_data['daily'][2]['weather'][0]['icon']
+
+
+    # fourthdayimage = json_data['daily'][3]['weather'][0]['icon']
+
+
+    # fifthdayimage = json_data['daily'][4]['weather'][0]['icon']
+
+
+    # sixthdayimage = json_data['daily'][5]['weather'][0]['icon']
+
+
+    # seventhdayimage = json_data['daily'][6]['weather'][0]['icon']
+
+    first = datetime.now()
+    day1.config(text=first.strftime("%A"))
+
+    second = first+timedelta(days=1)
+    day2.config(text=second.strftime("%A"))
+
+    third = first+timedelta(days=2)
+    day3.config(text=third.strftime("%A"))
+
+    fourth = first+timedelta(days=3)
+    day4.config(text=fourth.strftime("%A"))
+
+    fifth = first+timedelta(days=4)
+    day5.config(text=fifth.strftime("%A"))
+
+    sixth = first+timedelta(days=5)
+    day6.config(text=sixth.strftime("%A"))
+
+    seventh = first+timedelta(days=6)
+    day7.config(text=seventh.strftime("%A"))
 
 var=StringVar()
 
@@ -115,13 +156,13 @@ t = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 t.place(x=145, y=120)
 
 h = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
-h.place(x=150, y=140)
+h.place(x=145, y=140)
 
 p = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
-p.place(x=150, y=160)
+p.place(x=145, y=160)
 
 w = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
-w.place(x=150, y=180)
+w.place(x=145, y=180)
 
 d = Label(m, font=('Helvetica', 11), fg='white', bg='#203243')
 d.place(x=145, y=200)
@@ -129,22 +170,65 @@ d.place(x=145, y=200)
 firstframe = Frame(m, width=230, height=132, bg='#282829')
 firstframe.place(x=35, y=315)
 
+day1 = Label(firstframe,font=('Arial',20), bg='#282829', fg='#fff')
+day1.place(x=10,y=5)
+
+firstimage = Label(firstframe,bg='#282829')
+firstimage.place(x=1, y=15)
+
 secondframe = Frame(m, width=70, height=115, bg='#282829')
 secondframe.place(x=305, y=325)
+
+day2 = Label(secondframe, bg='#282829', fg='#fff')
+day2.place(x=10,y=5)
+
+secondimage = Label(secondframe,bg='#282829')
+secondimage.place(x=7, y=20)
 
 thirdframe = Frame(m, width=70, height=115, bg='#282829')
 thirdframe.place(x=405, y=325)
 
+day3 = Label(thirdframe, bg='#282829', fg='#fff')
+day3.place(x=10,y=5)
+
+thirdimage = Label(thirdframe,bg='#282829')
+thirdimage.place(x=7, y=20)
+
 fourthframe = Frame(m, width=70, height=115, bg='#282829')
 fourthframe.place(x=505, y=325)
+
+day4 = Label(fourthframe, bg='#282829', fg='#fff')
+day4.place(x=10,y=5)
+
+fourthimage = Label(fourthframe,bg='#282829')
+fourthimage.place(x=7, y=20)
 
 fifthframe = Frame(m, width=70, height=115, bg='#282829')
 fifthframe.place(x=605, y=325)
 
+day5 = Label(fifthframe, bg='#282829', fg='#fff')
+day5.place(x=10,y=5)
+
+fifthimage = Label(fifthframe,bg='#282829')
+fifthimage.place(x=7, y=20)
+
 sixthframe = Frame(m, width=70, height=115, bg='#282829')
 sixthframe.place(x=705, y=325)
 
+day6 = Label(sixthframe, bg='#282829', fg='#fff')
+day6.place(x=10,y=5)
+
+sixthimage = Label(sixthframe,bg='#282829')
+sixthimage.place(x=7, y=20)
+
 seventhframe = Frame(m, width=70, height=115, bg='#282829')
 seventhframe.place(x=805, y=325)
+
+day7 = Label(seventhframe, bg='#282829', fg='#fff')
+day7.place(x=10,y=5)
+
+seventhimage = Label(seventhframe,bg='#282829')
+seventhimage.place(x=7, y=20)
+
 m.mainloop()
 
