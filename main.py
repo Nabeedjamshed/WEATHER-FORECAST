@@ -53,6 +53,80 @@ def getweather():
         cursor=connection.cursor()
         cursor.execute(f"INSERT INTO PL_Project  values('{var.get()}','{in_celcius}','{current_time}')")
         cursor.commit()
+        t.config(text=(in_celcius[:2],'°C'))
+        h.config(text=(humidity,'%'))
+        p.config(text=(pressure,'hPa'))
+        w.config(text=(wind,'m/s'))
+        d.config(text=description)
+
+        firstdayimage = json_data['weather'][4]['icon']
+        photo1 = ImageTk.PhotoImage(file=f'icon/{firstdayimage}@2x.png')
+        firstdayimage.config(image=photo1)
+        firstdayimage.image=photo1
+
+        seconddayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{seconddayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        seconddayimage.config(image=photo2)
+        secondimage.image=photo2
+
+        thirddayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{thirddayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo3 = ImageTk.PhotoImage(resized_image)
+        thirddayimage.config(image=photo3)
+        thirdimage.image=photo3
+
+        fourthdayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{fourthdayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo4 = ImageTk.PhotoImage(resized_image)
+        fourthdayimage.config(image=photo4)
+        fourthimage.image=photo4
+
+        fifthdayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{fifthdayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo5 = ImageTk.PhotoImage(resized_image)
+        fifthdayimage.config(image=photo5)
+        fifthimage.image=photo5
+
+        sixthdayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{sixthdayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo6 = ImageTk.PhotoImage(resized_image)
+        sixthdayimage.config(image=photo6)
+        sixthimage.image=photo6
+
+        seventhdayimage = json_data['weather'][4]['icon']
+        img = (Image.open(f'icon/{seventhdayimage}@2x.png'))
+        resized_image = img.resize((50,50))
+        photo7 = ImageTk.PhotoImage(resized_image)
+        seventhdayimage.config(image=photo7)
+        seventhimage.image=photo7
+
+        first = datetime.now()
+        day1.config(text=first.strftime("%A"))
+
+        second = first+timedelta(days=1)
+        day2.config(text=second.strftime("%A"))
+
+        third = first+timedelta(days=2)
+        day3.config(text=third.strftime("%A"))
+
+        fourth = first+timedelta(days=3)
+        day4.config(text=fourth.strftime("%A"))
+
+        fifth = first+timedelta(days=4)
+        day5.config(text=fifth.strftime("%A"))
+
+        sixth = first+timedelta(days=5)
+        day6.config(text=sixth.strftime("%A"))
+
+        seventh = first+timedelta(days=6)
+        day7.config(text=seventh.strftime("%A"))
+
     except:
         Result = Label(m,bg='#3f92ff',fg="black",font=("Arial Black",15))
         Result.place(x=390, y=190)
@@ -64,51 +138,6 @@ def getweather():
     p.config(text=(pressure,'hPa'))
     w.config(text=(wind,'m/s'))
     d.config(text=description)
-
-    # firstdayimage = json_data['weather'][0]['icon']
-    # photo1 = ImageTk.PhotoImage(file=f'icon/{firstdayimage}@2x.png')
-    # firstdayimage.config(image=photo1)
-    # firstdayimage.image=photo1
-
-    # seconddayimage = json_data['daily'][1]['weather'][0]['icon']
-
-
-    # thirddayimage = json_data['daily'][2]['weather'][0]['icon']
-
-
-    # fourthdayimage = json_data['daily'][3]['weather'][0]['icon']
-
-
-    # fifthdayimage = json_data['daily'][4]['weather'][0]['icon']
-
-
-    # sixthdayimage = json_data['daily'][5]['weather'][0]['icon']
-
-
-    # seventhdayimage = json_data['daily'][6]['weather'][0]['icon']
-
-    first = datetime.now()
-    day1.config(text=first.strftime("%A"))
-
-    second = first+timedelta(days=1)
-    day2.config(text=second.strftime("%A"))
-
-    third = first+timedelta(days=2)
-    day3.config(text=third.strftime("%A"))
-
-    fourth = first+timedelta(days=3)
-    day4.config(text=fourth.strftime("%A"))
-
-    fifth = first+timedelta(days=4)
-    day5.config(text=fifth.strftime("%A"))
-
-    sixth = first+timedelta(days=5)
-    day6.config(text=sixth.strftime("%A"))
-
-    seventh = first+timedelta(days=6)
-    day7.config(text=seventh.strftime("%A"))
-
-
 
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
