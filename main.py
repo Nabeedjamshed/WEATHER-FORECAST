@@ -23,6 +23,7 @@ def getweather():
         city = textfield.get()
         geolocator = Nominatim(user_agent="Weather_App")
         location = geolocator.geocode(city)
+        
         obj = TimezoneFinder()
 
         result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
@@ -34,7 +35,7 @@ def getweather():
         current_time = local_time.strftime('%I:%M %p')
         clock.config(text=current_time)
         #API connection:
-        api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=59ab8ba866569cd2e9b54db3f44b84ec"
+        api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
         temp = json_data['main']['temp']
         in_celcius=str(temp-273)
@@ -107,7 +108,7 @@ def getweather():
     seventh = first+timedelta(days=6)
     day7.config(text=seventh.strftime("%A"))
 
-var=StringVar()
+
 
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
@@ -248,4 +249,6 @@ seventhimage = Label(seventhframe,bg='#282829')
 seventhimage.place(x=7, y=20)
 
 m.mainloop()
+
+
 
