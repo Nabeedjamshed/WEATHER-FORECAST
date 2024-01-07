@@ -37,7 +37,6 @@ def getweather():
         #API connection:
         api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
-        print(json_data)
         temp = json_data['main']['temp']
         in_celcius=str(temp-273)
         humidity = json_data['main']['humidity']
@@ -59,52 +58,38 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
 
-    firstdayimage = json_data['weather'][0]['icon']
-    photo1 = ImageTk.PhotoImage(file=f'icon/{firstdayimage}@2x.png')
-    firstdayimage.config(image=photo1)
-    firstdayimage.image=photo1
-
-    seconddayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{seconddayimage}@2x.png'))
-    resized_image = img.resize((50,50))
+    photo1 = ImageTk.PhotoImage(file='project pics/icon/02n@2x.png')
+    firstimage.config(image=photo1)
+    
+    original_image1 = Image.open('project pics/icon/02d@2x.png')
+    resized_image = original_image1.resize((50, 50))
     photo2 = ImageTk.PhotoImage(resized_image)
-    seconddayimage.config(image=photo2)
-    secondimage.image=photo2
+    secondimage.config(image=photo2)
 
-    thirddayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{thirddayimage}@2x.png'))
-    resized_image = img.resize((50,50))
-    photo3 = ImageTk.PhotoImage(resized_image)
-    thirddayimage.config(image=photo3)
-    thirdimage.image=photo3
+    original_image2 = Image.open('project pics/icon/02d@2x.png')
+    resized_image = original_image2.resize((50, 50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    thirdimage.config(image=photo2)
 
-    fourthdayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{fourthdayimage}@2x.png'))
-    resized_image = img.resize((50,50))
-    photo4 = ImageTk.PhotoImage(resized_image)
-    fourthdayimage.config(image=photo4)
-    fourthimage.image=photo4
+    # original_image3 = Image.open('project pics/icon/02d@2x.png')
+    # resized_image = original_image3.resize((50, 50))
+    # photo4 = ImageTk.PhotoImage(resized_image)
+    # fourthimage.config(image=photo4)
 
-    fifthdayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{fifthdayimage}@2x.png'))
-    resized_image = img.resize((50,50))
-    photo5 = ImageTk.PhotoImage(resized_image)
-    fifthdayimage.config(image=photo5)
-    fifthimage.image=photo5
+    # original_image4 = Image.open('project pics/icon/02d@2x.png')
+    # resized_image = original_image4.resize((50, 50))
+    # photo5 = ImageTk.PhotoImage(resized_image)
+    # fifthimage.config(image=photo5)
 
-    sixthdayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{sixthdayimage}@2x.png'))
-    resized_image = img.resize((50,50))
-    photo6 = ImageTk.PhotoImage(resized_image)
-    sixthdayimage.config(image=photo6)
-    sixthimage.image=photo6
+    # original_image5 = Image.open('project pics/icon/02d@2x.png')
+    # resized_image = original_image5.resize((50, 50))
+    # photo6 = ImageTk.PhotoImage(resized_image)
+    # sixthimage.config(image=photo6)
 
-    seventhdayimage = json_data['weather'][0]['icon']
-    img = (Image.open(f'icon/{seventhdayimage}@2x.png'))
-    resized_image = img.resize((50,50))
-    photo7 = ImageTk.PhotoImage(resized_image)
-    seventhdayimage.config(image=photo7)
-    seventhimage.image=photo7
+    # original_image6 = Image.open('project pics/icon/02d@2x.png')
+    # resized_image = original_image6.resize((50, 50))
+    # photo7 = ImageTk.PhotoImage(resized_image)
+    # seventhimage.config(image=photo7)
 
     first = datetime.now()
     day1.config(text=first.strftime("%A"))
