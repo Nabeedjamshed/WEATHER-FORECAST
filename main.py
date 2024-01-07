@@ -58,38 +58,44 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
 
-    photo1 = ImageTk.PhotoImage(file='project pics/icon/02n@2x.png')
+    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
     firstimage.config(image=photo1)
-    
-    original_image1 = Image.open('project pics/icon/02d@2x.png')
-    resized_image = original_image1.resize((50, 50))
+
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
     secondimage.config(image=photo2)
+    secondimage.image=photo2
 
-    original_image2 = Image.open('project pics/icon/02d@2x.png')
-    resized_image = original_image2.resize((50, 50))
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
     thirdimage.config(image=photo2)
+    thirdimage.image=photo2
 
-    # original_image3 = Image.open('project pics/icon/02d@2x.png')
-    # resized_image = original_image3.resize((50, 50))
-    # photo4 = ImageTk.PhotoImage(resized_image)
-    # fourthimage.config(image=photo4)
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    fourthimage.config(image=photo2)
+    fourthimage.image=photo2
 
-    # original_image4 = Image.open('project pics/icon/02d@2x.png')
-    # resized_image = original_image4.resize((50, 50))
-    # photo5 = ImageTk.PhotoImage(resized_image)
-    # fifthimage.config(image=photo5)
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    fifthimage.config(image=photo2)
+    fifthimage.image=photo2
 
-    # original_image5 = Image.open('project pics/icon/02d@2x.png')
-    # resized_image = original_image5.resize((50, 50))
-    # photo6 = ImageTk.PhotoImage(resized_image)
-    # sixthimage.config(image=photo6)
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    sixthimage.config(image=photo2)
+    sixthimage.image=photo2
 
-    # original_image6 = Image.open('project pics/icon/02d@2x.png')
-    # resized_image = original_image6.resize((50, 50))
-    # photo7 = ImageTk.PhotoImage(resized_image)
-    # seventhimage.config(image=photo7)
+    img = (Image.open('project pics/icon/02d@2x.png'))
+    resized_image = img.resize((50,50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    seventhimage.config(image=photo2)
+    seventhimage.image=photo2
 
     first = datetime.now()
     day1.config(text=first.strftime("%A"))
