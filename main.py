@@ -23,7 +23,7 @@ def getweather():
         city = textfield.get()
         geolocator = Nominatim(user_agent="Weather_App")
         location = geolocator.geocode(city)
-        
+    
         obj = TimezoneFinder()
 
         result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
@@ -58,34 +58,52 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
 
+    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png')
+    
+    firstimage.config(image=photo1)
+    firstimage.image=photo1
 
-    t.config(text=(in_celcius[:2],'°C'))
-    h.config(text=(humidity,'%'))
-    p.config(text=(pressure,'hPa'))
-    w.config(text=(wind,'m/s'))
-    d.config(text=description)
+    seconddayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{seconddayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo2 = ImageTk.PhotoImage(resized_image)
+    seconddayimage.config(image=photo2)
+    secondimage.image=photo2
 
-    # firstdayimage = json_data['weather'][0]['icon']
-    # photo1 = ImageTk.PhotoImage(file=f'icon/{firstdayimage}@2x.png')
-    # firstdayimage.config(image=photo1)
-    # firstdayimage.image=photo1
+    thirddayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{thirddayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo3 = ImageTk.PhotoImage(resized_image)
+    thirddayimage.config(image=photo3)
+    thirdimage.image=photo3
 
-    # seconddayimage = json_data['daily'][1]['weather'][0]['icon']
+    fourthdayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{fourthdayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo4 = ImageTk.PhotoImage(resized_image)
+    fourthdayimage.config(image=photo4)
+    fourthimage.image=photo4
 
+    fifthdayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{fifthdayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo5 = ImageTk.PhotoImage(resized_image)
+    fifthdayimage.config(image=photo5)
+    fifthimage.image=photo5
 
-    # thirddayimage = json_data['daily'][2]['weather'][0]['icon']
+    sixthdayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{sixthdayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo6 = ImageTk.PhotoImage(resized_image)
+    sixthdayimage.config(image=photo6)
+    sixthimage.image=photo6
 
-
-    # fourthdayimage = json_data['daily'][3]['weather'][0]['icon']
-
-
-    # fifthdayimage = json_data['daily'][4]['weather'][0]['icon']
-
-
-    # sixthdayimage = json_data['daily'][5]['weather'][0]['icon']
-
-
-    # seventhdayimage = json_data['daily'][6]['weather'][0]['icon']
+    seventhdayimage = json_data['weather'][3]['icon']
+    img = (Image.open(f'icon/{seventhdayimage}@2x.png'))
+    resized_image = img.resize((50,50))
+    photo7 = ImageTk.PhotoImage(resized_image)
+    seventhdayimage.config(image=photo7)
+    seventhimage.image=photo7
 
     first = datetime.now()
     day1.config(text=first.strftime("%A"))
@@ -107,8 +125,6 @@ def getweather():
 
     seventh = first+timedelta(days=6)
     day7.config(text=seventh.strftime("%A"))
-
-
 
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
@@ -139,7 +155,7 @@ cloud_image = PhotoImage(file='Images/Layer 7.png')
 weather_image = Label(m, image=cloud_image, bg='#203243')
 weather_image.place(x=290, y=127)
 
-textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', fg='white', border=0)
+textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
 textfield.place(x=370, y=130)
 textfield.focus()
 
@@ -161,6 +177,7 @@ Label(frame, image=second_box, bg='#212120').place(x=600,y=30)
 Label(frame, image=second_box, bg='#212120').place(x=700,y=30)
 Label(frame, image=second_box, bg='#212120').place(x=800,y=30)
 
+#clock (here we place a time)
 clock = Label(m, font=('Helvetica', 30, 'bold'), fg='white', bg='#57adff')
 clock.place(x=30, y=20)
 
@@ -189,7 +206,7 @@ firstframe = Frame(m, width=230, height=132, bg='#282829')
 firstframe.place(x=35, y=315)
 
 day1 = Label(firstframe,font=('Arial',20), bg='#282829', fg='#fff')
-day1.place(x=10,y=5)
+day1.place(x=100,y=5)
 
 firstimage = Label(firstframe,bg='#282829')
 firstimage.place(x=1, y=15)
