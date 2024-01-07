@@ -61,21 +61,20 @@ def getweather():
     photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png')
     
     firstimage.config(image=photo1)
-    firstimage.image=photo1
+    # firstimage.image=photo1
 
-    seconddayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{seconddayimage}@2x.png'))
+    
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
-    seconddayimage.config(image=photo2)
+    secondimage.config(image=photo2)
     secondimage.image=photo2
 
-    thirddayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{thirddayimage}@2x.png'))
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
-    photo3 = ImageTk.PhotoImage(resized_image)
-    thirddayimage.config(image=photo3)
-    thirdimage.image=photo3
+    photo2 = ImageTk.PhotoImage(resized_image)
+    thirdimage.config(image=photo2)
+    thirdimage.image=photo2
 
     fourthdayimage = json_data['weather'][3]['icon']
     img = (Image.open(f'icon/{fourthdayimage}@2x.png'))
