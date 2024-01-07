@@ -48,7 +48,7 @@ def getweather():
         p.config(text=(pressure,'hPa'))
         w.config(text=(wind,'m/s'))
         d.config(text=description)
-        connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workplace\weather-forecast\weather_app.accdb'
+        connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
         connection=pyodbc.connect(connector)
         cursor=connection.cursor()
         cursor.execute(f"INSERT INTO PL_Project  values('{var.get()}','{in_celcius}','{current_time}')")
