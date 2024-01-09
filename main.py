@@ -58,12 +58,9 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
 
-    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png')
-    
+    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
     firstimage.config(image=photo1)
-    # firstimage.image=photo1
 
-    
     img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
@@ -76,33 +73,29 @@ def getweather():
     thirdimage.config(image=photo2)
     thirdimage.image=photo2
 
-    fourthdayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{fourthdayimage}@2x.png'))
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
-    photo4 = ImageTk.PhotoImage(resized_image)
-    fourthdayimage.config(image=photo4)
-    fourthimage.image=photo4
+    photo2 = ImageTk.PhotoImage(resized_image)
+    fourthimage.config(image=photo2)
+    fourthimage.image=photo2
 
-    fifthdayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{fifthdayimage}@2x.png'))
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
-    photo5 = ImageTk.PhotoImage(resized_image)
-    fifthdayimage.config(image=photo5)
-    fifthimage.image=photo5
+    photo2 = ImageTk.PhotoImage(resized_image)
+    fifthimage.config(image=photo2)
+    fifthimage.image=photo2
 
-    sixthdayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{sixthdayimage}@2x.png'))
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
-    photo6 = ImageTk.PhotoImage(resized_image)
-    sixthdayimage.config(image=photo6)
-    sixthimage.image=photo6
+    photo2 = ImageTk.PhotoImage(resized_image)
+    sixthimage.config(image=photo2)
+    sixthimage.image=photo2
 
-    seventhdayimage = json_data['weather'][3]['icon']
-    img = (Image.open(f'icon/{seventhdayimage}@2x.png'))
+    img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
-    photo7 = ImageTk.PhotoImage(resized_image)
-    seventhdayimage.config(image=photo7)
-    seventhimage.image=photo7
+    photo2 = ImageTk.PhotoImage(resized_image)
+    seventhimage.config(image=photo2)
+    seventhimage.image=photo2
 
     first = datetime.now()
     day1.config(text=first.strftime("%A"))
