@@ -20,7 +20,7 @@ var=StringVar()
 def history():
     new=Tk()
     new.resizable(False,False)
-    new.geometry('400x200')
+    new.geometry('400x300+600+300')
     connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
     connection=pyodbc.connect(connector)
     cursor=connection.cursor()
@@ -149,7 +149,7 @@ def getweather():
     in_celcius1=tempday7-273
     in_celcius2=tempnight-273
     day7temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
+    
     first = datetime.now()
     day1.config(text=first.strftime("%A"))
 
