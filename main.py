@@ -1,6 +1,5 @@
 from tkinter import *
 import tkinter as tk
-from turtle import width
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -37,7 +36,6 @@ def getweather():
         #API connection:
         api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
-        # print(json_data)
         temp = json_data['main']['temp']
         in_celcius=str(temp-273)
         humidity = json_data['main']['humidity']
@@ -59,8 +57,10 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
 
-    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
+    img = (Image.open('project pics/icon/02n@2x.png'))
+    photo1 = ImageTk.PhotoImage(img)
     firstimage.config(image=photo1)
+    firstimage.image=photo1
     tempday1 = json_data['main']['temp_max']
     tempnight = json_data['main']['temp_min']
     in_celcius1=tempday1-273
@@ -175,21 +175,26 @@ label4.place(x=50, y=180)
 label5 = Label(m, text='Description', font=('Helvetica', 11), fg='white', bg='#203243')
 label5.place(x=50, y=200)
 
-search_image = PhotoImage(file="Images/Rounded Rectangle 3.png")
-myimage = Label(m, image=search_image, bg='#57adff')
+# Load images
+search_image = tk.PhotoImage(file="Images/Rounded Rectangle 3.png")
+cloud_image = tk.PhotoImage(file='Images/Layer 7.png')
+search_icon = tk.PhotoImage(file='Images/Layer 6.png')
+
+# Create and place labels
+myimage = tk.Label(m, image=search_image, bg='#3f92ff')
 myimage.place(x=270, y=120)
 
-cloud_image = PhotoImage(file='Images/Layer 7.png')
-weather_image = Label(m, image=cloud_image, bg='#203243')
+weather_image = tk.Label(m, image=cloud_image, bg='#203243')
 weather_image.place(x=290, y=127)
 
-textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
+# Create and place entry widget
+textfield = tk.Entry(m, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
 textfield.place(x=370, y=130)
 textfield.focus()
 
-search_icon = PhotoImage(file='Images/Layer 6.png')
-search_image = Button(image=search_icon, borderwidth=0, cursor='hand2', bg='#203243', command=getweather)
-search_image.place(x=645, y=125)
+# Create and place button with the search icon
+search_button = tk.Button(m, image=search_icon, borderwidth=0, cursor='hand2', bg='#203243',command=getweather)
+search_button.place(x=645, y=125)
 
 frame = Frame(m, width=900, height=180, bg='#212120')
 frame.pack(side=BOTTOM)
@@ -246,73 +251,73 @@ secondframe = Frame(m, width=70, height=115, bg='#282829')
 secondframe.place(x=305, y=325)
 
 day2 = Label(secondframe, bg='#282829', fg='#fff')
-day2.place(x=10,y=5)
+day2.place(x=6,y=5)
 
 secondimage = Label(secondframe,bg='#282829')
 secondimage.place(x=7, y=20)
 
 day2temp = Label(secondframe,bg='#282829',fg='#fff')
-day2temp.place(x=10,y=70)
+day2temp.place(x=0,y=70)
 
 thirdframe = Frame(m, width=70, height=115, bg='#282829')
 thirdframe.place(x=405, y=325)
 
 day3 = Label(thirdframe, bg='#282829', fg='#fff')
-day3.place(x=10,y=5)
+day3.place(x=6,y=5)
 
 thirdimage = Label(thirdframe,bg='#282829')
 thirdimage.place(x=7, y=20)
 
 day3temp = Label(thirdframe,bg='#282829',fg='#fff')
-day3temp.place(x=10,y=70)
+day3temp.place(x=0,y=70)
 
 fourthframe = Frame(m, width=70, height=115, bg='#282829')
 fourthframe.place(x=505, y=325)
 
 day4 = Label(fourthframe, bg='#282829', fg='#fff')
-day4.place(x=10,y=5)
+day4.place(x=6,y=5)
 
 fourthimage = Label(fourthframe,bg='#282829')
 fourthimage.place(x=7, y=20)
 
 day4temp = Label(fourthframe,bg='#282829',fg='#fff')
-day4temp.place(x=10,y=70)
+day4temp.place(x=0,y=70)
 
 fifthframe = Frame(m, width=70, height=115, bg='#282829')
 fifthframe.place(x=605, y=325)
 
 day5 = Label(fifthframe, bg='#282829', fg='#fff')
-day5.place(x=10,y=5)
+day5.place(x=6,y=5)
 
 fifthimage = Label(fifthframe,bg='#282829')
 fifthimage.place(x=7, y=20)
 
 day5temp = Label(fifthframe,bg='#282829',fg='#fff')
-day5temp.place(x=10,y=70)
+day5temp.place(x=0,y=70)
 
 sixthframe = Frame(m, width=70, height=115, bg='#282829')
 sixthframe.place(x=705, y=325)
 
 day6 = Label(sixthframe, bg='#282829', fg='#fff')
-day6.place(x=10,y=5)
+day6.place(x=6,y=5)
 
 sixthimage = Label(sixthframe,bg='#282829')
 sixthimage.place(x=7, y=20)
 
 day6temp = Label(sixthframe,bg='#282829',fg='#fff')
-day6temp.place(x=10,y=70)
+day6temp.place(x=0,y=70)
 
 seventhframe = Frame(m, width=70, height=115, bg='#282829')
 seventhframe.place(x=805, y=325)
 
 day7 = Label(seventhframe, bg='#282829', fg='#fff')
-day7.place(x=10,y=5)
+day7.place(x=6,y=5)
 
 seventhimage = Label(seventhframe,bg='#282829')
 seventhimage.place(x=7, y=20)
 
 day7temp = Label(seventhframe,bg='#282829',fg='#fff')
-day7temp.place(x=10,y=70)
+day7temp.place(x=0,y=70)
 
 m.mainloop()
 
