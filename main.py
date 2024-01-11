@@ -16,14 +16,30 @@ m.configure(bg='#3f92ff')
 m.resizable(False, False)
 var=StringVar()
 
+
+def history():
+    new=Tk()
+    new.resizable(False,False)
+    new.geometry('400x200')
+    connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
+    connection=pyodbc.connect(connector)
+    cursor=connection.cursor()
+    cursor.execute("SELECT TOP 7 Location,temp,c_time FROM PL_Project ORDER BY index DESC  ")
+    row=cursor.fetchall()
+    v=0
+    for i in row:
+        Label(new,text=i,font=("Arial Black",15)).place(x=10,y=30+v)
+        v=v+30
+    
+
 def getweather():
     try:
+        
         Result = Label(m,bg='#3f92ff',width=32,height=2)
         Result.place(x=390, y=190)
         city = textfield.get()
         geolocator = Nominatim(user_agent="Weather_App")
         location = geolocator.geocode(city)
-    
         obj = TimezoneFinder()
 
         result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
@@ -32,19 +48,20 @@ def getweather():
 
         home = pytz.timezone(result)
         local_time = datetime.now(home)
-        current_time = local_time.strftime('%I:%M %p')
+        current_time = str(local_time.strftime('%I:%M %p'))
+        
         clock.config(text=current_time)
         #API connection:
         api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
-        # print(json_data)
+        
         temp = json_data['main']['temp']
-        in_celcius=str(temp-273)
+        in_celcius=str(temp-273)[:2]
         humidity = json_data['main']['humidity']
         pressure = json_data['main']['pressure']
         wind = json_data['wind']['speed']
         description = json_data['weather'][0]['description']
-        t.config(text=(in_celcius[:2],'°C'))
+        t.config(text=(in_celcius,'°C'))
         h.config(text=(humidity,'%'))
         p.config(text=(pressure,'hPa'))
         w.config(text=(wind,'m/s'))
@@ -52,13 +69,13 @@ def getweather():
         connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
         connection=pyodbc.connect(connector)
         cursor=connection.cursor()
-        cursor.execute(f"INSERT INTO PL_Project  values('{var.get()}','{in_celcius}','{current_time}')")
+        cursor.execute(f"INSERT INTO PL_Project (Location,temp,c_time) VALUES ('{city}','{in_celcius}','{current_time}')")
         cursor.commit()
     except:
         Result = Label(m,bg='#3f92ff',fg="black",font=("Arial Black",15))
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
-
+    
     photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
     firstimage.config(image=photo1)
     tempday1 = json_data['main']['temp_max']
@@ -190,6 +207,9 @@ textfield.focus()
 search_icon = PhotoImage(file='Images/Layer 6.png')
 search_image = Button(image=search_icon, borderwidth=0, cursor='hand2', bg='#203243', command=getweather)
 search_image.place(x=645, y=125)
+
+history_data=Button(m,text="Histroy",command=history)
+history_data.place(x=830,y=250)
 
 frame = Frame(m, width=900, height=180, bg='#212120')
 frame.pack(side=BOTTOM)
