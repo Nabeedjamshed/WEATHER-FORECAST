@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from turtle import width
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -53,7 +54,10 @@ def getweather():
         #API connection:
         api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
- 
+        history_api=r'https://api.openweathermap.org/data/2.5/forecast?lat='+str(location.latitude)+"&lon="+str(location.longitude)+'&appid=ad6e4ad799bcb26d267de424771618f3'
+        json_data_2=requests.get(history_api).json()
+        print(json_data_2)
+        print(json_data)
         temp = json_data['main']['temp']
         in_celcius=str(temp-273)[:2]
         humidity = json_data['main']['humidity']
@@ -74,11 +78,9 @@ def getweather():
         Result = Label(m,bg='#3f92ff',fg="black",font=("Arial Black",15))
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
-
-    img = (Image.open('project pics/icon/02n@2x.png'))
-    photo1 = ImageTk.PhotoImage(img)
+    
+    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
     firstimage.config(image=photo1)
-    firstimage.image=photo1
     tempday1 = json_data['main']['temp_max']
     tempnight = json_data['main']['temp_min']
     in_celcius1=tempday1-273
@@ -90,8 +92,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     secondimage.config(image=photo2)
     secondimage.image=photo2
-    tempday2 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday2 = json_data_2['list'][8]['main']['temp_max']
+    tempnight = json_data_2['list'][8]['main']['temp_min']
     in_celcius1=tempday2-273
     in_celcius2=tempnight-273
     day2temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -101,8 +103,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     thirdimage.config(image=photo2)
     thirdimage.image=photo2
-    tempday3 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday3 = json_data_2['list'][11]['main']['temp_max']
+    tempnight = json_data_2['list'][11]['main']['temp_min']
     in_celcius1=tempday3-273
     in_celcius2=tempnight-273
     day3temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -112,8 +114,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     fourthimage.config(image=photo2)
     fourthimage.image=photo2
-    tempday4 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday4 = json_data_2['list'][19]['main']['temp_max']
+    tempnight = json_data_2['list'][19]['main']['temp_min']
     in_celcius1=tempday4-273
     in_celcius2=tempnight-273
     day4temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -123,8 +125,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     fifthimage.config(image=photo2)
     fifthimage.image=photo2
-    tempday5 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday5 = json_data_2['list'][27]['main']['temp_max']
+    tempnight = json_data_2['list'][27]['main']['temp_min']
     in_celcius1=tempday5-273
     in_celcius2=tempnight-273
     day5temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -134,8 +136,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     sixthimage.config(image=photo2)
     sixthimage.image=photo2
-    tempday6 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday6 = json_data_2['list'][31]['main']['temp_max']
+    tempnight = json_data_2['list'][31]['main']['temp_min']
     in_celcius1=tempday6-273
     in_celcius2=tempnight-273
     day6temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -145,8 +147,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     seventhimage.config(image=photo2)
     seventhimage.image=photo2
-    tempday7 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday7 = json_data_2['list'][35]['main']['temp_max']
+    tempnight = json_data_2['list'][35]['main']['temp_min']
     in_celcius1=tempday7-273
     in_celcius2=tempnight-273
     day7temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -193,28 +195,25 @@ label4.place(x=50, y=180)
 label5 = Label(m, text='Description', font=('Helvetica', 11), fg='white', bg='#203243')
 label5.place(x=50, y=200)
 
-# Load images
-search_image = tk.PhotoImage(file="Images/Rounded Rectangle 3.png")
-cloud_image = tk.PhotoImage(file='Images/Layer 7.png')
-search_icon = tk.PhotoImage(file='Images/Layer 6.png')
-
-# Create and place labels
-myimage = tk.Label(m, image=search_image, bg='#3f92ff')
+search_image = PhotoImage(file="Images/Rounded Rectangle 3.png")
+myimage = Label(m, image=search_image, bg='#57adff')
 myimage.place(x=270, y=120)
 
-weather_image = tk.Label(m, image=cloud_image, bg='#203243')
+cloud_image = PhotoImage(file='Images/Layer 7.png')
+weather_image = Label(m, image=cloud_image, bg='#203243')
 weather_image.place(x=290, y=127)
 
-# Create and place entry widget
-textfield = tk.Entry(m, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
+textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
 textfield.place(x=370, y=130)
 textfield.focus()
 
-# Create and place button with the search icon
-search_button = tk.Button(m, image=search_icon, borderwidth=0, cursor='hand2', bg='#203243',command=getweather)
-search_button.place(x=645, y=125)
+search_icon = PhotoImage(file='Images/Layer 6.png')
+search_image = Button(image=search_icon, borderwidth=0, cursor='hand2', bg='#203243', command=getweather)
+search_image.place(x=645, y=125)
+
 history_data=Button(m,text="Histroy",command=history)
 history_data.place(x=830,y=250)
+
 frame = Frame(m, width=900, height=180, bg='#212120')
 frame.pack(side=BOTTOM)
 
@@ -270,73 +269,73 @@ secondframe = Frame(m, width=70, height=115, bg='#282829')
 secondframe.place(x=305, y=325)
 
 day2 = Label(secondframe, bg='#282829', fg='#fff')
-day2.place(x=6,y=5)
+day2.place(x=10,y=5)
 
 secondimage = Label(secondframe,bg='#282829')
 secondimage.place(x=7, y=20)
 
 day2temp = Label(secondframe,bg='#282829',fg='#fff')
-day2temp.place(x=0,y=70)
+day2temp.place(x=5,y=70)
 
 thirdframe = Frame(m, width=70, height=115, bg='#282829')
 thirdframe.place(x=405, y=325)
 
 day3 = Label(thirdframe, bg='#282829', fg='#fff')
-day3.place(x=6,y=5)
+day3.place(x=10,y=5)
 
 thirdimage = Label(thirdframe,bg='#282829')
 thirdimage.place(x=7, y=20)
 
 day3temp = Label(thirdframe,bg='#282829',fg='#fff')
-day3temp.place(x=0,y=70)
+day3temp.place(x=5,y=70)
 
 fourthframe = Frame(m, width=70, height=115, bg='#282829')
 fourthframe.place(x=505, y=325)
 
 day4 = Label(fourthframe, bg='#282829', fg='#fff')
-day4.place(x=6,y=5)
+day4.place(x=10,y=5)
 
 fourthimage = Label(fourthframe,bg='#282829')
 fourthimage.place(x=7, y=20)
 
 day4temp = Label(fourthframe,bg='#282829',fg='#fff')
-day4temp.place(x=0,y=70)
+day4temp.place(x=5,y=70)
 
 fifthframe = Frame(m, width=70, height=115, bg='#282829')
 fifthframe.place(x=605, y=325)
 
 day5 = Label(fifthframe, bg='#282829', fg='#fff')
-day5.place(x=6,y=5)
+day5.place(x=10,y=5)
 
 fifthimage = Label(fifthframe,bg='#282829')
 fifthimage.place(x=7, y=20)
 
 day5temp = Label(fifthframe,bg='#282829',fg='#fff')
-day5temp.place(x=0,y=70)
+day5temp.place(x=5,y=70)
 
 sixthframe = Frame(m, width=70, height=115, bg='#282829')
 sixthframe.place(x=705, y=325)
 
 day6 = Label(sixthframe, bg='#282829', fg='#fff')
-day6.place(x=6,y=5)
+day6.place(x=10,y=5)
 
 sixthimage = Label(sixthframe,bg='#282829')
 sixthimage.place(x=7, y=20)
 
 day6temp = Label(sixthframe,bg='#282829',fg='#fff')
-day6temp.place(x=0,y=70)
+day6temp.place(x=5,y=70)
 
 seventhframe = Frame(m, width=70, height=115, bg='#282829')
 seventhframe.place(x=805, y=325)
 
 day7 = Label(seventhframe, bg='#282829', fg='#fff')
-day7.place(x=6,y=5)
+day7.place(x=10,y=5)
 
 seventhimage = Label(seventhframe,bg='#282829')
 seventhimage.place(x=7, y=20)
 
 day7temp = Label(seventhframe,bg='#282829',fg='#fff')
-day7temp.place(x=0,y=70)
+day7temp.place(x=5,y=70)
 
 m.mainloop()
 
