@@ -86,21 +86,25 @@ def history():
     connection=pyodbc.connect(connector)
     cursor=connection.cursor()
     cursor.execute("SELECT TOP 7 Location,temp,c_time FROM PL_Project ORDER BY index DESC  ")
-    row=cursor.fetchall()  
-    tree_view=ttk.Treeview(new) 
+    row=cursor.fetchall() 
+    style=ttk.Style()
+    style.configure('Treeview.Heading',font=("Arial black",14,"bold"))
+    tree_view=ttk.Treeview(new,show="headings") 
+    tree_view.tag_configure('font',font=('Arial',12))
+    tree_view.tag_configure('bg', background="light blue")
     tree_view['columns']=('Location','Temperature','Time')
     tree_view.heading('Location',text="LOCATION",anchor=W)
-    tree_view.heading('Temperature',text="TEMPERATURE",anchor=W)
+    tree_view.heading('Temperature',text="TEMPERATURE(°C)",anchor=W)
     tree_view.heading('Time',text="TIME",anchor=W)
+    
     for i in row:
-        tree_view.insert('',index='end',values=i)  
-        tree_view.pack(fill=Y,pady=200)
+        tree_view.insert('',index='end',values=(i[0],i[1],i[2]),tags=('font','bg'))  
+    tree_view.pack(padx=50,pady=200,expand=True)
 
     new.mainloop()
 
 def getweather():
     try:
-        
         Result = Label(m,bg='#3f92ff',width=32,height=2)
         Result.place(x=390, y=190)
         city = textfield.get()
@@ -329,7 +333,7 @@ day1.place(x=100,y=5)
 firstimage = Label(firstframe,bg='#282829')
 firstimage.place(x=1, y=15)
 
-day1temp = Label(firstframe,bg='#282829',fg='#57adff',font=('arial',15,'bold'))
+day1temp =Label(firstframe,bg='#282829',fg='#57adff',font=('arial',15,'bold'))
 day1temp.place(x=100,y=50)
 
 secondframe = Frame(m, width=70, height=115, bg='#282829')
