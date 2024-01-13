@@ -88,16 +88,18 @@ def history():
     row=cursor.fetchall() 
     style=ttk.Style()
     style.configure('Treeview.Heading',font=("Arial black",14,"bold"))
-    tree_view=ttk.Treeview(new,show="headings") 
+    tree_view=ttk.Treeview(new) 
     tree_view.tag_configure('font',font=('Arial',12))
     tree_view.tag_configure('bg', background="light blue")
     tree_view['columns']=('Location','Temperature','Time')
     tree_view.heading('Location',text="LOCATION",anchor=W)
     tree_view.heading('Temperature',text="TEMP(°C)",anchor=W)
     tree_view.heading('Time',text="TIME",anchor=W)
-    
+
+
+
     for i in row:
-        tree_view.insert('',index='end',values=(i[0],i[1],i[2]),tags=('font','bg'))  
+        tree_view.insert(parent='',index='end',values=(i[0],i[1],i[2]),tags=('font','bg'))  
     tree_view.pack(padx=50,pady=200,expand=True)
 
     new.mainloop()
