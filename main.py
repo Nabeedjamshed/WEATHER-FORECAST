@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter as tk
-from turtle import width
+from tkinter import Tk,PhotoImage
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -9,7 +9,6 @@ import requests
 import pytz
 from PIL import Image, ImageTk
 import pyodbc
-
 m = Tk()
 m.title("Weather App")
 m.geometry('890x470+300+200')
@@ -19,28 +18,99 @@ var=StringVar()
 
 
 def history():
-    new=Tk()
-    # new.resizable(False,False)
-    new.geometry('400x300+600+300')
+    new = Toplevel()
+    new.title("History")
+    new.configure(bg='#2c3e50')
+    screen_width = new.winfo_screenwidth()
+    screen_height = new.winfo_screenheight()
+    new.geometry(f"{screen_width}x{screen_height}+0+0")
+
+    icon = PhotoImage(file="Images/logo.png")
+    new.iconphoto(True,icon)
+    l1 = Label(new, text="Weather Forecast History", font=('Arial', 40), bg='black', fg='white', width=10, height=1)
+    l1.pack(side=TOP, fill=X)
+    
+    right_cloud1 = (Image.open('Images/black1.webp'))
+    new1 = right_cloud1.resize((150, 60))
+    b_cloud1 = ImageTk.PhotoImage(new1)
+    
+    img1 = Label(new, image=b_cloud1, bg='black')
+    img1.image=b_cloud1
+    img1.place(x=2, y=1)
+    
+
+    right_cloud2 = Image.open('Images/black2.webp')
+    new2 = right_cloud2.resize((150, 60))
+    b_cloud2 = ImageTk.PhotoImage(new2)
+
+    img2 = tk.Label(new, image=b_cloud2, bg='black')
+    img2.place(x=1200, y=1)
+
+    cor1 = Image.open('Images/corner1.jpeg')
+    new3 = cor1.resize((150, 200))
+    c_1 = ImageTk.PhotoImage(new3)
+
+    f_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    f_frame.place(x=4, y=70)
+
+    f_image = Label(f_frame, image=c_1, bg='#2c3e50')
+    f_image.place(x=0, y=0)
+
+    cor2 = Image.open('Images/corner2.jpeg')
+    new4 = cor2.resize((150, 200))
+    c_2 = ImageTk.PhotoImage(new4)
+
+    s_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    s_frame.place(x=1200, y=65)
+
+    s_image = Label(s_frame, image=c_2, bg='#2c3e50')
+    s_image.place(x=0, y=0)
+
+    water1 = Image.open('Images/w1.webp')
+    new5 = water1.resize((150, 250))  
+    w_1 = ImageTk.PhotoImage(new5)
+
+    t_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    t_frame.place(x=1200, y=505)
+
+    t_image = Label(t_frame, image=w_1, bg='#2c3e50')  
+    t_image.place(x=0, y=0)
+
+    wind1 = Image.open('Images/wind.jpeg')
+    new6 = wind1.resize((150, 250))  
+    wind_1 = ImageTk.PhotoImage(new6)
+
+    fr_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    fr_frame.place(x=4, y=490)
+
+    fr_image = Label(fr_frame, image=wind_1, bg='#2c3e50')
+    fr_image.place(x=0, y=0)
+
+    fi_frame = Frame(new, width=1046, height=300, bg='black')
+    fi_frame.place(x=155, y=668)
     connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
     connection=pyodbc.connect(connector)
     cursor=connection.cursor()
     cursor.execute("SELECT TOP 7 Location,temp,c_time FROM PL_Project ORDER BY index DESC  ")
-    row=cursor.fetchall()  
-    tree_view=ttk.Treeview(new) 
+    row=cursor.fetchall() 
+    style=ttk.Style()
+    style.configure('Treeview.Heading',font=("Arial black",14,"bold"))
+    tree_view=ttk.Treeview(new,show="headings") 
+    tree_view.tag_configure('font',font=('Arial',12))
+    tree_view.tag_configure('bg', background="light blue")
     tree_view['columns']=('Location','Temperature','Time')
     tree_view.heading('Location',text="LOCATION",anchor=W)
-    tree_view.heading('Temperature',text="TEMPERATURE",anchor=W)
+    tree_view.heading('Temperature',text="TEMPERATURE(°C)",anchor=W)
     tree_view.heading('Time',text="TIME",anchor=W)
-    for i in row:
-        tree_view.insert('',index='end',values=i)  
-        tree_view.pack(fill=Y,pady=200)
-    new.mainloop()
     
+    for i in row:
+        tree_view.insert('',index='end',values=(i[0],i[1],i[2]),tags=('font','bg'))  
+    tree_view.pack(padx=50,pady=200,expand=True)
+
+    new.mainloop()
 
 def getweather():
     try:
-        
         Result = Label(m,bg='#3f92ff',width=32,height=2)
         Result.place(x=390, y=190)
         city = textfield.get()
@@ -83,14 +153,16 @@ def getweather():
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
     
-    photo1 = ImageTk.PhotoImage(file='project pics/icon/01d@2x.png') 
+    img = (Image.open('project pics/icon/02n@2x.png'))
+    photo1 = ImageTk.PhotoImage(img)
     firstimage.config(image=photo1)
+    firstimage.image=photo1
     tempday1 = json_data['main']['temp_max']
     tempnight = json_data['main']['temp_min']
     in_celcius1=tempday1-273
     in_celcius2=tempnight-273
     day1temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
+    
     img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
@@ -199,25 +271,28 @@ label4.place(x=50, y=180)
 label5 = Label(m, text='Description', font=('Helvetica', 11), fg='white', bg='#203243')
 label5.place(x=50, y=200)
 
-search_image = PhotoImage(file="Images/Rounded Rectangle 3.png")
-myimage = Label(m, image=search_image, bg='#57adff')
+# Load images
+search_image = tk.PhotoImage(file="Images/Rounded Rectangle 3.png")
+cloud_image = tk.PhotoImage(file='Images/Layer 7.png')
+search_icon = tk.PhotoImage(file='Images/Layer 6.png')
+
+# Create and place labels
+myimage = tk.Label(m, image=search_image, bg='#3f92ff')
 myimage.place(x=270, y=120)
 
-cloud_image = PhotoImage(file='Images/Layer 7.png')
-weather_image = Label(m, image=cloud_image, bg='#203243')
+weather_image = tk.Label(m, image=cloud_image, bg='#203243')
 weather_image.place(x=290, y=127)
 
-textfield = tk.Entry(m,textvariable=var, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
+# Create and place entry widget
+textfield = tk.Entry(m, justify='center', width=15, font=('poppins', 25, 'bold'), bg='#203243', border=0, fg='white')
 textfield.place(x=370, y=130)
 textfield.focus()
 
-search_icon = PhotoImage(file='Images/Layer 6.png')
-search_image = Button(image=search_icon, borderwidth=0, cursor='hand2', bg='#203243', command=getweather)
-search_image.place(x=645, y=125)
-
+# Create and place button with the search icon
+search_button = tk.Button(m, image=search_icon, borderwidth=0, cursor='hand2', bg='#203243',command=getweather)
+search_button.place(x=645, y=125)
 history_data=Button(m,text="Histroy",command=history)
 history_data.place(x=830,y=250)
-
 frame = Frame(m, width=900, height=180, bg='#212120')
 frame.pack(side=BOTTOM)
 
@@ -273,75 +348,74 @@ secondframe = Frame(m, width=70, height=115, bg='#282829')
 secondframe.place(x=305, y=325)
 
 day2 = Label(secondframe, bg='#282829', fg='#fff')
-day2.place(x=10,y=5)
+day2.place(x=6,y=5)
 
 secondimage = Label(secondframe,bg='#282829')
 secondimage.place(x=7, y=20)
 
 day2temp = Label(secondframe,bg='#282829',fg='#fff')
-day2temp.place(x=5,y=70)
+day2temp.place(x=0,y=70)
 
 thirdframe = Frame(m, width=70, height=115, bg='#282829')
 thirdframe.place(x=405, y=325)
 
 day3 = Label(thirdframe, bg='#282829', fg='#fff')
-day3.place(x=10,y=5)
+day3.place(x=6,y=5)
 
 thirdimage = Label(thirdframe,bg='#282829')
 thirdimage.place(x=7, y=20)
 
 day3temp = Label(thirdframe,bg='#282829',fg='#fff')
-day3temp.place(x=5,y=70)
+day3temp.place(x=0,y=70)
 
 fourthframe = Frame(m, width=70, height=115, bg='#282829')
 fourthframe.place(x=505, y=325)
 
 day4 = Label(fourthframe, bg='#282829', fg='#fff')
-day4.place(x=10,y=5)
+day4.place(x=6,y=5)
 
 fourthimage = Label(fourthframe,bg='#282829')
 fourthimage.place(x=7, y=20)
 
 day4temp = Label(fourthframe,bg='#282829',fg='#fff')
-day4temp.place(x=5,y=70)
+day4temp.place(x=0,y=70)
 
 fifthframe = Frame(m, width=70, height=115, bg='#282829')
 fifthframe.place(x=605, y=325)
 
 day5 = Label(fifthframe, bg='#282829', fg='#fff')
-day5.place(x=10,y=5)
+day5.place(x=6,y=5)
 
 fifthimage = Label(fifthframe,bg='#282829')
 fifthimage.place(x=7, y=20)
 
 day5temp = Label(fifthframe,bg='#282829',fg='#fff')
-day5temp.place(x=5,y=70)
+day5temp.place(x=0,y=70)
 
 sixthframe = Frame(m, width=70, height=115, bg='#282829')
 sixthframe.place(x=705, y=325)
 
 day6 = Label(sixthframe, bg='#282829', fg='#fff')
-day6.place(x=10,y=5)
+day6.place(x=6,y=5)
 
 sixthimage = Label(sixthframe,bg='#282829')
 sixthimage.place(x=7, y=20)
 
 day6temp = Label(sixthframe,bg='#282829',fg='#fff')
-day6temp.place(x=5,y=70)
+day6temp.place(x=0,y=70)
 
 seventhframe = Frame(m, width=70, height=115, bg='#282829')
 seventhframe.place(x=805, y=325)
 
 day7 = Label(seventhframe, bg='#282829', fg='#fff')
-day7.place(x=10,y=5)
+day7.place(x=6,y=5)
 
 seventhimage = Label(seventhframe,bg='#282829')
 seventhimage.place(x=7, y=20)
 
 day7temp = Label(seventhframe,bg='#282829',fg='#fff')
-day7temp.place(x=5,y=70)
+day7temp.place(x=0,y=70)
 
 m.mainloop()
-
 
 
