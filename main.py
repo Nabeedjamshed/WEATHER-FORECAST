@@ -88,11 +88,21 @@ def history():
 
     fi_frame = Frame(new, width=1046, height=300, bg='black')
     fi_frame.place(x=155, y=668)
-
+    connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
+    connection=pyodbc.connect(connector)
+    cursor=connection.cursor()
+    cursor.execute("SELECT TOP 7 Location,temp,c_time FROM PL_Project ORDER BY index DESC  ")
+    row=cursor.fetchall()  
+    tree_view=ttk.Treeview(new) 
+    tree_view['columns']=('Location','Temperature','Time')
+    tree_view.heading('Location',text="LOCATION",anchor=W)
+    tree_view.heading('Temperature',text="TEMPERATURE",anchor=W)
+    tree_view.heading('Time',text="TIME",anchor=W)
+    for i in row:
+        tree_view.insert('',index='end',values=i)  
+        tree_view.pack(fill=Y,pady=200)
 
     new.mainloop()
-
-    
 
 def getweather():
     try:
@@ -116,7 +126,8 @@ def getweather():
         #API connection:
         api = r"https://api.openweathermap.org/data/2.5/weather?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&appid=ad6e4ad799bcb26d267de424771618f3"
         json_data = requests.get(api).json()
- 
+        history_api=r'https://api.openweathermap.org/data/2.5/forecast?lat='+str(location.latitude)+"&lon="+str(location.longitude)+'&appid=ad6e4ad799bcb26d267de424771618f3'
+        json_data_2=requests.get(history_api).json()
         temp = json_data['main']['temp']
         in_celcius=str(temp-273)[:2]
         humidity = json_data['main']['humidity']
@@ -137,7 +148,7 @@ def getweather():
         Result = Label(m,bg='#3f92ff',fg="black",font=("Arial Black",15))
         Result.place(x=390, y=190)
         Result.config(text="INVALID LOCATION!")
-
+    
     img = (Image.open('project pics/icon/02n@2x.png'))
     photo1 = ImageTk.PhotoImage(img)
     firstimage.config(image=photo1)
@@ -147,14 +158,14 @@ def getweather():
     in_celcius1=tempday1-273
     in_celcius2=tempnight-273
     day1temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
+    
     img = (Image.open('project pics/icon/02d@2x.png'))
     resized_image = img.resize((50,50))
     photo2 = ImageTk.PhotoImage(resized_image)
     secondimage.config(image=photo2)
     secondimage.image=photo2
-    tempday2 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday2 = json_data_2['list'][8]['main']['temp_max']
+    tempnight = json_data_2['list'][15]['main']['temp_min']
     in_celcius1=tempday2-273
     in_celcius2=tempnight-273
     day2temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -164,8 +175,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     thirdimage.config(image=photo2)
     thirdimage.image=photo2
-    tempday3 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday3 = json_data_2['list'][11]['main']['temp_max']
+    tempnight = json_data_2['list'][18]['main']['temp_min']
     in_celcius1=tempday3-273
     in_celcius2=tempnight-273
     day3temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -175,8 +186,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     fourthimage.config(image=photo2)
     fourthimage.image=photo2
-    tempday4 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday4 = json_data_2['list'][19]['main']['temp_max']
+    tempnight = json_data_2['list'][26]['main']['temp_min']
     in_celcius1=tempday4-273
     in_celcius2=tempnight-273
     day4temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -186,8 +197,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     fifthimage.config(image=photo2)
     fifthimage.image=photo2
-    tempday5 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday5 = json_data_2['list'][27]['main']['temp_max']
+    tempnight = json_data_2['list'][34]['main']['temp_min']
     in_celcius1=tempday5-273
     in_celcius2=tempnight-273
     day5temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -197,8 +208,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     sixthimage.config(image=photo2)
     sixthimage.image=photo2
-    tempday6 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday6 = json_data_2['list'][31]['main']['temp_max']
+    tempnight = json_data_2['list'][38]['main']['temp_min']
     in_celcius1=tempday6-273
     in_celcius2=tempnight-273
     day6temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -208,8 +219,8 @@ def getweather():
     photo2 = ImageTk.PhotoImage(resized_image)
     seventhimage.config(image=photo2)
     seventhimage.image=photo2
-    tempday7 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
+    tempday7 = json_data_2['list'][35]['main']['temp_max']
+    tempnight = json_data_2['list'][35]['main']['temp_min']
     in_celcius1=tempday7-273
     in_celcius2=tempnight-273
     day7temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
@@ -402,6 +413,5 @@ day7temp = Label(seventhframe,bg='#282829',fg='#fff')
 day7temp.place(x=0,y=70)
 
 m.mainloop()
-
 
 
