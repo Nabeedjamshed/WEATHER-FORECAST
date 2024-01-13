@@ -1,6 +1,5 @@
 from tkinter import *
 import tkinter as tk
-from tkinter import Tk,PhotoImage
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -94,7 +93,7 @@ def history():
     tree_view.tag_configure('bg', background="light blue")
     tree_view['columns']=('Location','Temperature','Time')
     tree_view.heading('Location',text="LOCATION",anchor=W)
-    tree_view.heading('Temperature',text="TEMPERATURE(°C)",anchor=W)
+    tree_view.heading('Temperature',text="TEMP(°C)",anchor=W)
     tree_view.heading('Time',text="TIME",anchor=W)
     
     for i in row:
@@ -142,106 +141,105 @@ def getweather():
         cursor=connection.cursor()
         cursor.execute(f"INSERT INTO PL_Project (Location,temp,c_time) VALUES ('{city}','{in_celcius}','{current_time}')")
         cursor.commit()
+        tempday1 = json_data['main']['temp_max']
+        tempnight = json_data['main']['temp_min']
+        img = (Image.open('project pics/icon/02n@2x.png'))
+        photo1 = ImageTk.PhotoImage(img)
+        firstimage.config(image=photo1)
+        firstimage.image=photo1
+        in_celcius1=tempday1-273
+        in_celcius2=tempnight-273
+        day1temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+        
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        secondimage.config(image=photo2)
+        secondimage.image=photo2
+        tempday2 = json_data_2['list'][8]['main']['temp_max']
+        tempnight = json_data_2['list'][15]['main']['temp_min']
+        in_celcius1=tempday2-273
+        in_celcius2=tempnight-273
+        day2temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        thirdimage.config(image=photo2)
+        thirdimage.image=photo2
+        tempday3 = json_data_2['list'][11]['main']['temp_max']
+        tempnight = json_data_2['list'][18]['main']['temp_min']
+        in_celcius1=tempday3-273
+        in_celcius2=tempnight-273
+        day3temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        fourthimage.config(image=photo2)
+        fourthimage.image=photo2
+        tempday4 = json_data_2['list'][19]['main']['temp_max']
+        tempnight = json_data_2['list'][26]['main']['temp_min']
+        in_celcius1=tempday4-273
+        in_celcius2=tempnight-273
+        day4temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        fifthimage.config(image=photo2)
+        fifthimage.image=photo2
+        tempday5 = json_data_2['list'][27]['main']['temp_max']
+        tempnight = json_data_2['list'][34]['main']['temp_min']
+        in_celcius1=tempday5-273
+        in_celcius2=tempnight-273
+        day5temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        sixthimage.config(image=photo2)
+        sixthimage.image=photo2
+        tempday6 = json_data_2['list'][31]['main']['temp_max']
+        tempnight = json_data_2['list'][38]['main']['temp_min']
+        in_celcius1=tempday6-273
+        in_celcius2=tempnight-273
+        day6temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+
+        img = (Image.open('project pics/icon/02d@2x.png'))
+        resized_image = img.resize((50,50))
+        photo2 = ImageTk.PhotoImage(resized_image)
+        seventhimage.config(image=photo2)
+        seventhimage.image=photo2
+        tempday7 = json_data_2['list'][35]['main']['temp_max']
+        tempnight = json_data_2['list'][35]['main']['temp_min']
+        in_celcius1=tempday7-273
+        in_celcius2=tempnight-273
+        day7temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
+        
+        first = datetime.now()
+        day1.config(text=first.strftime("%A"))
+
+        second = first+timedelta(days=1)
+        day2.config(text=second.strftime("%A"))
+
+        third = first+timedelta(days=2)
+        day3.config(text=third.strftime("%A"))
+
+        fourth = first+timedelta(days=3)
+        day4.config(text=fourth.strftime("%A"))
+
+        fifth = first+timedelta(days=4)
+        day5.config(text=fifth.strftime("%A"))
+
+        sixth = first+timedelta(days=5)
+        day6.config(text=sixth.strftime("%A"))
+
+        seventh = first+timedelta(days=6)
+        day7.config(text=seventh.strftime("%A"))
     except:
         messagebox.showerror("Error","Invalid Location!")
     
-    img = (Image.open('project pics/icon/02n@2x.png'))
-    photo1 = ImageTk.PhotoImage(img)
-    firstimage.config(image=photo1)
-    firstimage.image=photo1
-    tempday1 = json_data['main']['temp_max']
-    tempnight = json_data['main']['temp_min']
-    in_celcius1=tempday1-273
-    in_celcius2=tempnight-273
-    day1temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-    
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    secondimage.config(image=photo2)
-    secondimage.image=photo2
-    tempday2 = json_data_2['list'][8]['main']['temp_max']
-    tempnight = json_data_2['list'][15]['main']['temp_min']
-    in_celcius1=tempday2-273
-    in_celcius2=tempnight-273
-    day2temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    thirdimage.config(image=photo2)
-    thirdimage.image=photo2
-    tempday3 = json_data_2['list'][11]['main']['temp_max']
-    tempnight = json_data_2['list'][18]['main']['temp_min']
-    in_celcius1=tempday3-273
-    in_celcius2=tempnight-273
-    day3temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    fourthimage.config(image=photo2)
-    fourthimage.image=photo2
-    tempday4 = json_data_2['list'][19]['main']['temp_max']
-    tempnight = json_data_2['list'][26]['main']['temp_min']
-    in_celcius1=tempday4-273
-    in_celcius2=tempnight-273
-    day4temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    fifthimage.config(image=photo2)
-    fifthimage.image=photo2
-    tempday5 = json_data_2['list'][27]['main']['temp_max']
-    tempnight = json_data_2['list'][34]['main']['temp_min']
-    in_celcius1=tempday5-273
-    in_celcius2=tempnight-273
-    day5temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    sixthimage.config(image=photo2)
-    sixthimage.image=photo2
-    tempday6 = json_data_2['list'][31]['main']['temp_max']
-    tempnight = json_data_2['list'][38]['main']['temp_min']
-    in_celcius1=tempday6-273
-    in_celcius2=tempnight-273
-    day6temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-
-    img = (Image.open('project pics/icon/02d@2x.png'))
-    resized_image = img.resize((50,50))
-    photo2 = ImageTk.PhotoImage(resized_image)
-    seventhimage.config(image=photo2)
-    seventhimage.image=photo2
-    tempday7 = json_data_2['list'][35]['main']['temp_max']
-    tempnight = json_data_2['list'][35]['main']['temp_min']
-    in_celcius1=tempday7-273
-    in_celcius2=tempnight-273
-    day7temp.config(text=f"Day:{round(in_celcius1,2)}\n  Night:{round(in_celcius2,2)}")
-    
-    first = datetime.now()
-    day1.config(text=first.strftime("%A"))
-
-    second = first+timedelta(days=1)
-    day2.config(text=second.strftime("%A"))
-
-    third = first+timedelta(days=2)
-    day3.config(text=third.strftime("%A"))
-
-    fourth = first+timedelta(days=3)
-    day4.config(text=fourth.strftime("%A"))
-
-    fifth = first+timedelta(days=4)
-    day5.config(text=fifth.strftime("%A"))
-
-    sixth = first+timedelta(days=5)
-    day6.config(text=sixth.strftime("%A"))
-
-    seventh = first+timedelta(days=6)
-    day7.config(text=seventh.strftime("%A"))
-
 image_icon = PhotoImage(file="Images/logo.png")
 m.iconphoto(False, image_icon)
 
@@ -409,5 +407,3 @@ day7temp = Label(seventhframe,bg='#282829',fg='#fff')
 day7temp.place(x=0,y=70)
 
 m.mainloop()
-
-
