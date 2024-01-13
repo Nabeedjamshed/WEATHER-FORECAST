@@ -47,47 +47,41 @@ def history():
     img2.place(x=1200, y=1)
 
     cor1 = Image.open('Images/corner1.jpeg')
-    new3 = cor1.resize((150, 200))
+    new3 = cor1.resize((150, 203))
     c_1 = ImageTk.PhotoImage(new3)
 
-    f_frame = Frame(new, width=150, height=250, bg='#2c3e50')
-    f_frame.place(x=4, y=70)
-
-    f_image = Label(f_frame, image=c_1, bg='#2c3e50')
-    f_image.place(x=0, y=0)
+    f_image = Label(new, image=c_1, bg='#2c3e50')
+    f_image.place(x=0, y=67)
 
     cor2 = Image.open('Images/corner2.jpeg')
-    new4 = cor2.resize((150, 200))
+    new4 = cor2.resize((150, 203))
     c_2 = ImageTk.PhotoImage(new4)
 
-    s_frame = Frame(new, width=150, height=250, bg='#2c3e50')
-    s_frame.place(x=1200, y=65)
-
-    s_image = Label(s_frame, image=c_2, bg='#2c3e50')
-    s_image.place(x=0, y=0)
+    s_image = Label(new, image=c_2, bg='#2c3e50')
+    s_image.place(x=1206, y=65)
 
     water1 = Image.open('Images/w1.webp')
-    new5 = water1.resize((150, 250))  
+    new5 = water1.resize((160, 230))  
     w_1 = ImageTk.PhotoImage(new5)
 
-    t_frame = Frame(new, width=150, height=250, bg='#2c3e50')
-    t_frame.place(x=1200, y=505)
-
-    t_image = Label(t_frame, image=w_1, bg='#2c3e50')  
-    t_image.place(x=0, y=0)
+    t_image = Label(new, image=w_1, bg='#2c3e50')  
+    t_image.place(x=1200, y=490)
 
     wind1 = Image.open('Images/wind.jpeg')
     new6 = wind1.resize((150, 250))  
     wind_1 = ImageTk.PhotoImage(new6)
 
-    fr_frame = Frame(new, width=150, height=250, bg='#2c3e50')
-    fr_frame.place(x=4, y=490)
-
-    fr_image = Label(fr_frame, image=wind_1, bg='#2c3e50')
-    fr_image.place(x=0, y=0)
+    fr_image = Label(new, image=wind_1, bg='#2c3e50')
+    fr_image.place(x=0, y=490)
 
     fi_frame = Frame(new, width=1046, height=300, bg='black')
     fi_frame.place(x=155, y=668)
+
+    six_frame = Frame(new,width=37, height=218, bg='black')
+    six_frame.place(x=0,y=272)
+
+    sev_frame = Frame(new,width=37, height=220, bg='black')
+    sev_frame.place(x=1322,y=270)
     connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
     connection=pyodbc.connect(connector)
     cursor=connection.cursor()
@@ -151,9 +145,7 @@ def getweather():
         cursor.execute(f"INSERT INTO PL_Project (Location,temp,c_time) VALUES ('{city}','{in_celcius}','{current_time}')")
         cursor.commit()
     except:
-        Result = Label(m,bg='#3f92ff',fg="black",font=("Arial Black",15))
-        Result.place(x=390, y=190)
-        Result.config(text="INVALID LOCATION!")
+        messagebox.showerror("Error","Invalid Location!")
     
     img = (Image.open('project pics/icon/02n@2x.png'))
     photo1 = ImageTk.PhotoImage(img)
