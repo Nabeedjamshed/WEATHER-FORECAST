@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from tkinter import Tk,PhotoImage
 from geopy.geocoders import Nominatim
 from tkinter import ttk, messagebox
 from timezonefinder import TimezoneFinder
@@ -17,18 +18,80 @@ var=StringVar()
 
 
 def history():
-    new=Tk()
-    new.resizable(False,False)
-    new.geometry('400x300+600+300')
-    connector=r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\workspace\weather-forecast\weather_app.accdb'
-    connection=pyodbc.connect(connector)
-    cursor=connection.cursor()
-    cursor.execute("SELECT TOP 7 Location,temp,c_time FROM PL_Project ORDER BY index DESC  ")
-    row=cursor.fetchall()
-    v=0
-    for i in row:
-        Label(new,text=i,font=("Arial Black",15)).place(x=10,y=30+v)
-        v=v+30
+    new = Toplevel()
+    new.title("History")
+    new.configure(bg='#2c3e50')
+    screen_width = new.winfo_screenwidth()
+    screen_height = new.winfo_screenheight()
+    new.geometry(f"{screen_width}x{screen_height}+0+0")
+
+    icon = PhotoImage(file="Images/logo.png")
+    new.iconphoto(True,icon)
+    l1 = Label(new, text="Weather Forecast History", font=('Arial', 40), bg='black', fg='white', width=10, height=1)
+    l1.pack(side=TOP, fill=X)
+    
+    right_cloud1 = (Image.open('Images/black1.webp'))
+    new1 = right_cloud1.resize((150, 60))
+    b_cloud1 = ImageTk.PhotoImage(new1)
+    
+    img1 = Label(new, image=b_cloud1, bg='black')
+    img1.image=b_cloud1
+    img1.place(x=2, y=1)
+    
+
+    right_cloud2 = Image.open('Images/black2.webp')
+    new2 = right_cloud2.resize((150, 60))
+    b_cloud2 = ImageTk.PhotoImage(new2)
+
+    img2 = tk.Label(new, image=b_cloud2, bg='black')
+    img2.place(x=1200, y=1)
+
+    cor1 = Image.open('Images/corner1.jpeg')
+    new3 = cor1.resize((150, 200))
+    c_1 = ImageTk.PhotoImage(new3)
+
+    f_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    f_frame.place(x=4, y=70)
+
+    f_image = Label(f_frame, image=c_1, bg='#2c3e50')
+    f_image.place(x=0, y=0)
+
+    cor2 = Image.open('Images/corner2.jpeg')
+    new4 = cor2.resize((150, 200))
+    c_2 = ImageTk.PhotoImage(new4)
+
+    s_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    s_frame.place(x=1200, y=65)
+
+    s_image = Label(s_frame, image=c_2, bg='#2c3e50')
+    s_image.place(x=0, y=0)
+
+    water1 = Image.open('Images/w1.webp')
+    new5 = water1.resize((150, 250))  
+    w_1 = ImageTk.PhotoImage(new5)
+
+    t_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    t_frame.place(x=1200, y=505)
+
+    t_image = Label(t_frame, image=w_1, bg='#2c3e50')  
+    t_image.place(x=0, y=0)
+
+    wind1 = Image.open('Images/wind.jpeg')
+    new6 = wind1.resize((150, 250))  
+    wind_1 = ImageTk.PhotoImage(new6)
+
+    fr_frame = Frame(new, width=150, height=250, bg='#2c3e50')
+    fr_frame.place(x=4, y=490)
+
+    fr_image = Label(fr_frame, image=wind_1, bg='#2c3e50')
+    fr_image.place(x=0, y=0)
+
+    fi_frame = Frame(new, width=1046, height=300, bg='black')
+    fi_frame.place(x=155, y=668)
+
+
+    new.mainloop()
+
     
 
 def getweather():
