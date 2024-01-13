@@ -9,7 +9,7 @@ import requests
 import pytz
 from PIL import Image, ImageTk
 import pyodbc
-import pandas as pd
+
 m = Tk()
 m.title("Weather App")
 m.geometry('890x470+300+200')
@@ -266,7 +266,7 @@ day1.place(x=100,y=5)
 firstimage = Label(firstframe,bg='#282829')
 firstimage.place(x=1, y=15)
 
-day1temp = Label(firstframe,bg='#282829',fg='#57adff',font=('arial',15,'bold'))
+day1temp =Label(firstframe,bg='#282829',fg='#57adff',font=('arial',15,'bold'))
 day1temp.place(x=100,y=50)
 
 secondframe = Frame(m, width=70, height=115, bg='#282829')
